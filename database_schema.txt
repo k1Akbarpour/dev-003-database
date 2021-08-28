@@ -1,0 +1,85 @@
+-- ---
+-- Globals
+-- ---
+
+-- SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+-- SET FOREIGN_KEY_CHECKS=0;
+
+-- ---
+-- Table 'Users'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Users`;
+		
+CREATE TABLE `Users` (
+  `id` VARCHAR(32) NOT NULL,
+  `FirstName` VARCHAR(64) NULL DEFAULT NULL,
+  `LastName` VARCHAR(64) NULL DEFAULT NULL,
+  `UserName` VARCHAR(64) NULL DEFAULT NULL,
+  `Mobile` VARCHAR(13) NULL,
+  `Email` VARCHAR(32) NULL DEFAULT NULL,
+  `Status` bit NOT NULL,
+  `RegisterAt` DATETIME NOT NULL,
+  PRIMARY KEY (`id`),
+KEY (`UserName`)
+);
+
+-- ---
+-- Table 'Projects'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Projects`;
+		
+CREATE TABLE `Projects` (
+  `id` VARCHAR(32) NOT NULL,
+  `Title` VARCHAR(32) NOT NULL,
+  `Description` MEDIUMTEXT(128) NULL DEFAULT NULL,
+  `Price` BIGINT NOT NULL,
+  `Status` bit NOT NULL,
+  `RegisterAt` DATETIME NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'Rols'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Rols`;
+		
+CREATE TABLE `Rols` (
+  `id` VARCHAR(32) NOT NULL,
+  `Role` VARCHAR(32) NOT NULL,
+  `ProjectId` VARCHAR(32) NOT NULL,
+  `UserId` VARCHAR(32) NOT NULL,
+  `Ruls` VARCHAR(32) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Foreign Keys 
+-- ---
+
+ALTER TABLE `Rols` ADD FOREIGN KEY (ProjectId) REFERENCES `Projects` (`id`);
+ALTER TABLE `Rols` ADD FOREIGN KEY (UserId) REFERENCES `Users` (`id`);
+
+-- ---
+-- Table Properties
+-- ---
+
+-- ALTER TABLE `Users` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `Projects` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `Rols` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ---
+-- Test Data
+-- ---
+
+-- INSERT INTO `Users` (`id`,`FirstName`,`LastName`,`UserName`,`Mobile`,`Email`,`Status`,`RegisterAt`) VALUES
+-- ('','','','','','','','');
+-- INSERT INTO `Projects` (`id`,`Title`,`Description`,`Price`,`Status`,`RegisterAt`) VALUES
+-- ('','','','','','');
+-- INSERT INTO `Rols` (`id`,`Role`,`ProjectId`,`UserId`,`Ruls`) VALUES
+-- ('','','','','');
